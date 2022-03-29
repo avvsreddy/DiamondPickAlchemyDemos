@@ -8,12 +8,15 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
 {
     public class CatagoriesController : Controller
     {
+
+        // dependancy injection
         private readonly ApplicationDbContext db;
 
         public CatagoriesController(ApplicationDbContext db)
         {
             this.db = db;
         }
+
 
         // /Catagories/List
         public IActionResult List()
