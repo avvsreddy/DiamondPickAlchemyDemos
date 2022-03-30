@@ -1,0 +1,33 @@
+﻿@model List<Catagory>
+
+<h1>Catagories List (@Model.Count)</h1>
+
+@*<a class="btn btn-primary"   href="/Catagories/Create">Create</a>
+<br />
+@Html.ActionLink("Create Catagory","Create","Catagories", null,new { @class="btn btn-primary"})
+<br />*@
+<a asp-action="Create" asp-controller="Catagories" class="btn btn-primary">Create Catagory</a>
+<br />
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <td>Catagory ID</td>
+            <td>Name</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cat in Model)
+       {
+            <tr>
+
+            <td> @cat.CatagoryID </td>
+            <td> @cat.CatagoryName </td>
+            <td> @cat.Description </td>
+
+        </tr>
+       }
+    </tbody>
+</table>
+

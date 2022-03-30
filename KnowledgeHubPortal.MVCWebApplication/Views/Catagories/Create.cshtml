@@ -1,0 +1,43 @@
+﻿@model Catagory
+<h2>Create Catagory</h2>
+<hr />
+
+@*client side data validation
+*@
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src = "~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+*@
+<form asp-action="Save" asp-controller="Catagories" >
+    
+    Enter Catagory Name<br />
+@*    <input type="text" name="catagoryname345" />
+*@    
+        <input asp-for=CatagoryName />
+        <span asp-validation-for=CatagoryName></span>
+    <br />
+    Enter Catagory Description<br />
+    @*<textarea name="description" rows=5 cols=60></textarea><br />*@
+    <textarea asp-for=Description rows=5, cols=30></textarea>
+    <span asp-validation-for=Description></span>
+    
+    <br />
+
+    <input type="submit" value="Create" />
+
+</form>
+
+@*<form action="Create" method="post">
+    html tags
+</form>
+
+@using(Html.BeginForm("Create"))
+{
+    Html helper methods
+}*@
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
