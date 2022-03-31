@@ -1,0 +1,27 @@
+﻿@model Catagory
+<h2>Edit Catagory</h2>
+<hr />
+
+<form asp-action="Update" asp-controller="Catagories" >
+    
+
+    <input type="hidden" name="CatagoryID" value="@Model.CatagoryID" />
+    Edit Catagory Name<br />
+        <input asp-for=CatagoryName value=@Model.CatagoryName/>
+        <span asp-validation-for=CatagoryName></span>
+    <br />
+    Edit Catagory Description<br />
+    <textarea asp-for=Description rows=5, cols=30>@Model.Description</textarea>
+    <span asp-validation-for=Description></span>
+    
+    <br />
+
+    <input type="submit" value="Update" />
+
+</form>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

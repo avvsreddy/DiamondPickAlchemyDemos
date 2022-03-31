@@ -7,7 +7,7 @@ using System.Text;
 
 namespace KnowledgeHubPortal.MVCWebApplication.Data
 {
-    public class ApplicationDbContext : DbContext   //IdentityDbContext
+    public class ApplicationDbContext :    DbContext //IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -15,6 +15,7 @@ namespace KnowledgeHubPortal.MVCWebApplication.Data
         }
 
         public DbSet<Catagory> Catagories { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

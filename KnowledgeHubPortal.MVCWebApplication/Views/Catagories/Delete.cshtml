@@ -1,0 +1,7 @@
+﻿@model Catagory
+
+<h3>@Model.CatagoryName</h3>
+<p>Are you sure to delete the above catagory?</p>
+<hr />
+<a asp-action=DeleteConfirm asp-controller=Catagories asp-route-id=@Model.CatagoryID class="btn btn-danger">Yes</a>
+<a asp-action=List asp-controller=Catagories class="btn btn-primary">No</a>

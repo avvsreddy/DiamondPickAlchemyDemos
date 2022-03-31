@@ -1,0 +1,27 @@
+﻿@model Article
+<h2>Submit Article</h2>
+<hr />
+
+@if(TempData["Message"]!= null)
+{
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@TempData["Message"]</strong>.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+
+<form asp-action=Save asp-controller=Articles method="post">
+    <input asp-for=Title placeholder="Enter Article Title" /><br />
+
+    <input asp-for=ArticleUrl placeholder="Enter Article Url" /><br />
+
+    <textarea asp-for=Description placeholder="Enter Article Description"></textarea><br />
+
+    <select asp-for=CatagoryID asp-items=ViewBag.CatagoryList></select><br />
+
+    <input type="submit" value="Crete" />
+</form>
