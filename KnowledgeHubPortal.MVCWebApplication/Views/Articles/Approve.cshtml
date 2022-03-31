@@ -1,0 +1,35 @@
+﻿@model List<ArticleViewModel>
+
+
+<h3>Approve / Reject Articles</h3>
+<hr />
+
+ <form method="post" >
+<table class="table table-bordered table-hover">
+
+    <thead>
+        <tr>
+            <td>Select</td>
+            <td>Title</td>
+            <td>Catagory</td>
+        </tr>
+    </thead>
+    <tbody>
+       
+        @foreach (var a in Model)
+       {
+           <tr>
+            <td>
+                <input type="checkbox" name="articleid" value=@a.ArticleID>
+            </td>
+            <td> <a href="@a.ArticleUrl" target="_blank">@a.Title </a></td>
+            
+            <td>@a.CatagoryName</td>
+        </tr>
+       }
+    </tbody>
+</table>
+<input type="submit" asp-action="ConfirmApproval" asp-controller="Articles" value=Approve class="btn btn-info"/>
+<input type="submit" asp-action="ConfirmReject" asp-controller="Articles" value=Reject class="btn btn-danger"/>
+
+</form>

@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KnowledgeHubPortal.MVCWebApplication.Models
 {
+    // domain/entity class
+
     public class Article
     {
         public int ArticleID { get; set; }
