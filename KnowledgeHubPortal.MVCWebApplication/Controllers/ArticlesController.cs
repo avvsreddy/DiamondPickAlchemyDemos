@@ -6,24 +6,22 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KnowledgeHubPortal.MVCWebApplication.Controllers
 {
     public class ArticlesController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly KnowledgeHubDbContext db;
 
         // inject the db context
-        public ArticlesController(ApplicationDbContext db)
+        public ArticlesController(KnowledgeHubDbContext db)
         {
             this.db = db;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        // for on registered and login user only
+        [Authorize]
         public IActionResult Create()
         {
             // return a view to collect article information
@@ -34,7 +32,8 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
             ViewBag.CatagoryList = catagoryList;
             return View();
         }
-
+        // for on registered and login user only
+        [Authorize]
         public IActionResult Save(Article article)
         {
             // do validation
@@ -54,6 +53,8 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
             return RedirectToAction("Create");
 
         }
+        // only admin
+        [Authorize(Roles ="admin")]
         public IActionResult Approve()
         {
             // fetch the data required for approve view and return
@@ -71,7 +72,8 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
             return View(articlesToApprove);
 
         }
-
+        // only admin
+        [Authorize(Roles = "admin")]
         public IActionResult ConfirmApproval(List<int> articleid)
         {
             // get all articles for approval
@@ -84,7 +86,8 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
             db.SaveChanges();
             return RedirectToAction("Approve");
         }
-
+        // only admin
+        [Authorize(Roles = "admin")]
         public IActionResult ConfirmReject(List<int> articleid)
         {
             // get all articles for approval
@@ -95,7 +98,7 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
             return RedirectToAction("Approve");
         }
 
-
+        // anyone
         public IActionResult BrowseArticles(int catagoryId=0)
         {
             // fetch all approved articles and send to view

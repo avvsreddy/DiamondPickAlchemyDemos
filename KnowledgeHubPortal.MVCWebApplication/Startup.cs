@@ -28,12 +28,19 @@ namespace KnowledgeHubPortal.MVCWebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
+            
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddDbContext<KnowledgeHubDbContext>(options =>
+               options.UseSqlServer(
+                   Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddRoles();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+               .AddRoles<IdentityRole>()
+               .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
         }
 
@@ -58,6 +65,7 @@ namespace KnowledgeHubPortal.MVCWebApplication
 
             app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

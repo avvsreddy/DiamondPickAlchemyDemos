@@ -1,4 +1,5 @@
 ﻿using KnowledgeHubPortal.MVCWebApplication.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,9 +8,22 @@ using System.Text;
 
 namespace KnowledgeHubPortal.MVCWebApplication.Data
 {
-    public class ApplicationDbContext :    DbContext //IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+       
+    }
+
+
+
+
+
+    public class KnowledgeHubDbContext : DbContext //IdentityDbContext
+    {
+        public KnowledgeHubDbContext(DbContextOptions<KnowledgeHubDbContext> options)
             : base(options)
         {
         }
@@ -27,4 +41,5 @@ namespace KnowledgeHubPortal.MVCWebApplication.Data
                     new Catagory { CatagoryID = 444, CatagoryName = "Social", Description = "Get a social network" } });
         }
     }
+
 }

@@ -10,9 +10,9 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
     {
 
         // dependancy injection
-        private readonly ApplicationDbContext db;
+        private readonly KnowledgeHubDbContext db;
 
-        public CatagoriesController(ApplicationDbContext db)
+        public CatagoriesController(KnowledgeHubDbContext db)
         {
             this.db = db;
         }
