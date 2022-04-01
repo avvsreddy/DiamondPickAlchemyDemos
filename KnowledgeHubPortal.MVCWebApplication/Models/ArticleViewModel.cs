@@ -8,5 +8,7 @@
        
         public string ArticleUrl { get; set; }
         public string CatagoryName { get; set; }
+
+        public System.DateTime DateSubmitted { get; set; }
     }
 }

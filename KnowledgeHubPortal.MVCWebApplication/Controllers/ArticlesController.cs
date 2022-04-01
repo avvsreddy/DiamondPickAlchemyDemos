@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using Humanizer;
 
 namespace KnowledgeHubPortal.MVCWebApplication.Controllers
 {
@@ -64,7 +65,8 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
                                                            ArticleID = a.ArticleID,
                                                            Title = a.Title,
                                                            ArticleUrl = a.ArticleUrl,
-                                                           CatagoryName = a.Catagory.CatagoryName
+                                                           CatagoryName = a.Catagory.CatagoryName,
+                                                           DateSubmitted = a.DateSubmited
                                                        }).ToList();
             return View(articlesToApprove);
 
@@ -91,6 +93,56 @@ namespace KnowledgeHubPortal.MVCWebApplication.Controllers
             db.Articles.RemoveRange(articlesToReject);
             db.SaveChanges();
             return RedirectToAction("Approve");
+        }
+
+
+        public IActionResult BrowseArticles(int catagoryId=0)
+        {
+            // fetch all approved articles and send to view
+
+            List<BrowseArticleViewModel> articles = null;
+
+            if (catagoryId == 0)
+            {
+                articles = (from a in db.Articles
+                            where a.IsApproved
+                            select new BrowseArticleViewModel
+                            {
+                                Title = a.Title,
+                                ArticleUrl = a.ArticleUrl,
+                                Description = a.Description,
+                                DateSubmited = a.DateSubmited,
+                                SubmittedBy = a.SubmittedBy
+
+                            }).ToList();
+            }
+            else
+            {
+                articles = (from a in db.Articles
+                            where a.IsApproved == true && a.CatagoryID == catagoryId
+                            select new BrowseArticleViewModel
+                            {
+                                Title = a.Title,
+                                ArticleUrl = a.ArticleUrl,
+                                Description = a.Description,
+                                DateSubmited = a.DateSubmited,
+                                SubmittedBy = a.SubmittedBy
+
+                            }).ToList();
+            }
+
+            List<SelectListItem> catagories = (from c in db.Catagories
+                                               select new SelectListItem 
+                                               { 
+                                                   Text = c.CatagoryName, 
+                                                   Value = c.CatagoryID.ToString()
+                                               }).ToList();
+
+            ViewBag.Catagories = catagories;
+
+
+            return View(articles);
+
         }
     }
 }

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<KnowledgeHubPortal.MVCWebApplication.Models.BrowseArticleViewModel>
+@using Humanizer
+@{
+    ViewData["Title"] = "Browse Articles";
+}
+
+<h1>Browse Articles</h1>
+<form asp-action=BrowseArticles asp-controller=Articles>
+    <select name=catagoryid asp-items=@ViewBag.Catagories></select>
+    <input type="submit" value="Search" />
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubmittedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateSubmited)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a href=@item.ArticleUrl target="_blank">@item.Title</a>
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmittedBy)
+            </td>
+            <td>
+                @item.DateSubmited.Humanize(false)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

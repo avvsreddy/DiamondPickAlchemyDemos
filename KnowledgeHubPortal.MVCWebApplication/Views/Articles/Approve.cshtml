@@ -1,5 +1,5 @@
 ﻿@model List<ArticleViewModel>
-
+@using Humanizer
 
 <h3>Approve / Reject Articles</h3>
 <hr />
@@ -12,6 +12,7 @@
             <td>Select</td>
             <td>Title</td>
             <td>Catagory</td>
+            <td>When</td>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
             <td> <a href="@a.ArticleUrl" target="_blank">@a.Title </a></td>
             
             <td>@a.CatagoryName</td>
+            <td>@a.DateSubmitted.Humanize(false)</td>
         </tr>
        }
     </tbody>
