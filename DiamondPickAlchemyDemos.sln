@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Layer", "Domain Laye
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Layer", "Data Layer", "{2D3B9501-9B81-4B88-8843-5E2F61316AFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeHubPortal.MVCWebApplication", "KnowledgeHubPortal.MVCWebApplication\KnowledgeHubPortal.MVCWebApplication.csproj", "{67A0B480-65BF-4D3C-8224-A42CE80652B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeHubPortal.MVCWebApplication", "KnowledgeHubPortal.MVCWebApplication\KnowledgeHubPortal.MVCWebApplication.csproj", "{67A0B480-65BF-4D3C-8224-A42CE80652B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
