@@ -93,6 +93,47 @@ namespace SuperProductsCatalog.API.Controllers
             return Ok(products);
         }
 
+        // DELETE api/superproducts/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteById(int id)
+        {
+            var productToDel = db.Products.Find(id);
+            if (productToDel == null)
+                return NotFound();
+            db.Products.Remove(productToDel);
+            db.SaveChanges();
+            return NoContent();
+        }
 
+        // PUT api/superproducts/{id}
+        [HttpPut("{id}")]
+        public ActionResult EditProduct(int id, [FromBody]Product productToEdit)
+        {
+            if (id != productToEdit.ProductID)
+                return BadRequest();
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(productToEdit).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return Ok(productToEdit);
+
+        }
+
+        // POST api/superproducts
+        [HttpPost]
+        public ActionResult SaveProduct(Product productToSave)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            db.Products.Add(productToSave);
+            db.SaveChanges();
+            // return location/201/data
+            return Created($"api/superproducts/{productToSave.ProductID}", productToSave);
+        }
     }
 }
