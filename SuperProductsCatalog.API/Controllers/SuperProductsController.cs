@@ -66,7 +66,7 @@ namespace SuperProductsCatalog.API.Controllers
 
         // Lab 3: GET api/superproducts/cheapest => return cheapest product
         [HttpGet("cheapest")]
-        public ActionResult GetCheapestProduct()
+        public IActionResult GetCheapestProduct()
         {
             var cheapestProduct = db.Products.OrderBy(p => p.Cost).FirstOrDefault();
             return Ok(cheapestProduct);
@@ -83,7 +83,7 @@ namespace SuperProductsCatalog.API.Controllers
 
         // Lab 5: GET api/superproducts/costbetween/10000/50000 => return all products cost between provided value
         [HttpGet("costbetween/{min}/{max}")]
-        public ActionResult<List<Product>> GetProductsByCost(int min, int max)
+        public IActionResult GetProductsByCost(int min, int max)
         {
             var products = (from p in db.Products
                             where p.Cost >= min && p.Cost <= max

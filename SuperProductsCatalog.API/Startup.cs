@@ -36,7 +36,7 @@ namespace SuperProductsCatalog.API
             });
 
 
-            services.AddControllers();
+            services.AddControllers().AddXmlSerializerFormatters();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperProductsCatalog.API", Version = "v1" });
