@@ -1,0 +1,11 @@
+﻿Music Store Web API 
+================================================
+Step 1: Implement the interface IMusicStoreRepository in MusicStoreRepository class
+Step 2: Register the Dependancy Injection for MusicStoreRepository in Startup class 
+Step 3: Implement the Action Methods in GenresController
+Step 4: Test the Genres Controller in Swagger/Postman
+Step 5: Implement the Action Methods in ArtistsController
+Step 6: Test the Artists Controller in Swagger/Postman
+Step 7: Implement the Action Methods in AlbumsController
+Step 8: Test the Albums Controller in Swagger/Postman
+
