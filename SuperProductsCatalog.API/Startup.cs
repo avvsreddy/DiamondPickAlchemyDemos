@@ -1,18 +1,12 @@
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SuperProductsCatalog.API.Model.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SuperProductsCatalog.API
 {
@@ -30,13 +24,32 @@ namespace SuperProductsCatalog.API
         {
             // IoC Reg
 
+            
+
             services.AddDbContext<SuperProductsDbContext>(options => 
             {
                 options.UseSqlServer(Configuration.GetConnectionString("default"));
             });
 
+            // create a CORS policy
+            services.AddCors(options => 
+            {
+                options.AddPolicy(name: "mypolicy1",
+                    b=>b.AllowAnyOrigin());
+                    //b => b.WithOrigins("www.abc.com"));
+            }
+            );
 
-            services.AddControllers().AddXmlSerializerFormatters();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "mypolicy2",
+                    //b => b.AllowAnyOrigin());
+                b => b.WithOrigins("www.abc.com"));
+            }
+            );
+
+            services.AddControllers().AddXmlSerializerFormatters().AddNewtonsoftJson();
+            services.AddOData();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperProductsCatalog.API", Version = "v1" });
@@ -57,10 +70,15 @@ namespace SuperProductsCatalog.API
 
             app.UseRouting();
 
+            app.UseCors("mypolicy");
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.EnableDependencyInjection();
+                endpoints.Select().OrderBy().Filter().MaxTop(10).SkipToken().Expand();
+
                 endpoints.MapControllers();
             });
         }
