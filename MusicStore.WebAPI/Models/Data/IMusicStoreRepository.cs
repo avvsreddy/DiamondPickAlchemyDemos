@@ -11,7 +11,10 @@ namespace MusicStore.WebAPI.Models.Data
         Genre GetGenre(int id);
         List<Artist> GetArtists();
         Artist GetArtist(int id);
-        List<Album> GetTopSellingAlbums(int count);
+
+        List<Album> GetAlbumsByArtist(int artistId);
+        List<Album> GetAlbumsByGenre(int genreId);
+
         List<Album> GetAlbumsWithGenreAndArtist();
         Album CreateAlbum(Album album);
         Album UpdateAlbum(int id, Album album);

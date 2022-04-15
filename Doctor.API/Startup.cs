@@ -1,19 +1,25 @@
+using DoctorManager;
+//using DoctorsRepository;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
-using MusicStore.WebAPI.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Doctors_Repository;
 
-namespace MusicStore.WebAPI
+namespace Doctor.API
 {
     public class Startup
     {
@@ -27,13 +33,21 @@ namespace MusicStore.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // TODO - Register the IMusicStoreRepository here
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 
-            services.AddSingleton<IMusicStoreRepository, MusicStoreRepository>();
+            services.AddDbContext<DoctorsRepository.DoctorsContextDb>(options => 
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("default"));
+            });
+
+            services.AddScoped<DoctorsManager>();
+            services.AddScoped<DoctorsRepository.IDoctorsRepository, DoctorsRepo>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MusicStore.WebAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Doctor.API", Version = "v1" });
             });
         }
 
@@ -44,13 +58,14 @@ namespace MusicStore.WebAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MusicStore.WebAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doctor.API v1"));
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

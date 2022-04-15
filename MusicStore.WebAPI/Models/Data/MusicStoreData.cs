@@ -7,19 +7,25 @@ namespace MusicStore.WebAPI.Models.Data
     {
         public static List<Album> GetAlbums()
         {
-             return new List<Album>
-             {
-             new Album { Title = "The Best Of Men At Work", Genre = GetGenres().Single(g => g.Name
-            == "Rock"), Price = 8.99M, Artist = GetArtists().Single(a => a.Name == "Men At Work"), AlbumArtUrl =
+            return new List<Album>
+            {
+                new Album { AlbumID = 1, Title = "The Best Of Men At Work", Genre = GetGenres().Single(g => g.Name
+                  == "Rock"), Price = 8.99M, Artist = GetArtists().Single(a => a.Name == "Men At Work"), AlbumArtUrl =
             "/Content/Images/placeholder.gif" },
-             new Album { Title = "A Copland Celebration, Vol. I", Genre = GetGenres().Single(g =>
-            g.Name == "Classical"), Price = 8.99M, Artist = GetArtists().Single(a => a.Name == "Aaron Copland & London Symphony Orchestra"), AlbumArtUrl = "/Content/Images/placeholder.gif" },
-             new Album { Title = "Worlds", Genre = GetGenres().Single(g => g.Name == "Jazz"), Price
+                new Album { AlbumID = 2, Title = "A Copland Celebration, Vol. I", Genre = GetGenres().Single(g =>
+                g.Name == "Classical"), Price = 8.99M, Artist = GetArtists().Single(a => a.Name == "Aaron Copland & London Symphony Orchestra"), AlbumArtUrl = "/Content/Images/placeholder.gif" },
+                new Album { AlbumID = 3, Title = "Worlds", Genre = GetGenres().Single(g => g.Name == "Jazz"), Price
             = 8.99M, Artist = GetArtists().Single(a => a.Name == "Aaron Goldberg"), AlbumArtUrl =
             "/Content/Images/placeholder.gif" },
-             new Album { Title = "For Those About To Rock We Salute You", Genre =
+
+
+                new Album { Title = "For Those About To Rock We Salute You", Genre =
             GetGenres().Single(g => g.Name == "Rock"), Price = 8.99M, Artist = GetArtists().Single(a => a.Name ==
             "AC/DC"), AlbumArtUrl = "/Content/Images/placeholder.gif" },
+            }; 
+       }
+/*
+
              new Album { Title = "Let There Be Rock", Genre = GetGenres().Single(g => g.Name ==
             "Rock"), Price = 8.99M, Artist = GetArtists().Single(a => a.Name == "AC/DC"), AlbumArtUrl =
             "/Content/Images/placeholder.gif" },
@@ -91,7 +97,11 @@ namespace MusicStore.WebAPI.Models.Data
             "Classical"), Price = 8.99M, Artist = GetArtists().Single(a => a.Name == "Britten Sinfonia, Ivor Bolton & Lesley Garrett"), AlbumArtUrl = "/Content/Images/placeholder.gif" },
              new Album { Title = "Chemical Wedding", Genre = GetGenres().Single(g => g.Name ==
             "Metal"), Price = 8.99M, Artist = GetArtists().Single(a => a.Name == "Bruce Dickinson"), AlbumArtUrl =
-            "/Content/Images/placeholder.gif" },
+            "/Content/Images/placeholder.gif" }
+
+             }; 
+        }
+        /*
              new Album { Title = "Prenda Minha", Genre = GetGenres().Single(g => g.Name == "Latin"),
             Price = 8.99M, Artist = GetArtists().Single(a => a.Name == "Caetano Veloso"), AlbumArtUrl =
             "/Content/Images/placeholder.gif" },
@@ -723,7 +733,7 @@ namespace MusicStore.WebAPI.Models.Data
             "/Content/Images/placeholder.gif" }
                          };
            
-        }
+        }*/
 
         public static List<Genre> GetGenres()
         {

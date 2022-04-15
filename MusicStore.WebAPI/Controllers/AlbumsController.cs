@@ -23,7 +23,9 @@ namespace MusicStore.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<Album> GetAll()
         {
-            throw new NotImplementedException();
+            //MusicStoreRepository repo = new MusicStoreRepository();
+            var r = repo.GetAlbums();
+            return r;
         }
 
         [HttpGet("toprated/{count}")]
@@ -36,7 +38,7 @@ namespace MusicStore.WebAPI.Controllers
         [HttpGet("{id}")]
         public Album GetById(int id)
         {
-            throw new NotImplementedException();
+            return repo.GetAlbum(id);
         }
         [HttpGet("WithGenreAndArtist")]
         List<Album> GetAlbumsWithGenreAndArtist()

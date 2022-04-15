@@ -40,10 +40,21 @@ namespace MusicStore.WebAPI.Models.Data
 
         public Album GetAlbum(int id)
         {
-            throw new System.NotImplementedException();
+            return MusicStoreData.GetAlbums().Find(a => a.AlbumID == id);
         }
 
         public List<Album> GetAlbums()
+        {
+            //throw new System.NotImplementedException();
+            return MusicStoreData.GetAlbums();
+        }
+
+        public List<Album> GetAlbumsByArtist(int artistId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Album> GetAlbumsByGenre(int genreId)
         {
             throw new System.NotImplementedException();
         }
@@ -73,10 +84,7 @@ namespace MusicStore.WebAPI.Models.Data
             throw new System.NotImplementedException();
         }
 
-        public List<Album> GetTopSellingAlbums(int count)
-        {
-            throw new System.NotImplementedException();
-        }
+       
 
         public Album UpdateAlbum(int id, Album album)
         {
