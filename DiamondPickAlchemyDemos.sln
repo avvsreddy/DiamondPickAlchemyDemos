@@ -53,9 +53,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Testing Demo", "Unit T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Layer", "Domain Layer", "{4C27088C-C3F8-45C1-92E0-8EA7EF30A025}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperCalculator", "SuperCalculator\SuperCalculator.csproj", "{05D72E51-F8DF-454E-9F7E-E632B5A0A555}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperCalculator", "SuperCalculator\SuperCalculator.csproj", "{05D72E51-F8DF-454E-9F7E-E632B5A0A555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperCalculator.UnitTest", "SuperCalculator.UnitTest\SuperCalculator.UnitTest.csproj", "{5659F99F-870B-40BF-A877-329391C85434}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperCalculator.UnitTest", "SuperCalculator.UnitTest\SuperCalculator.UnitTest.csproj", "{5659F99F-870B-40BF-A877-329391C85434}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF Core Demos", "EF Core Demos", "{F50361C0-7AC8-4FE5-BCA6-8AD070F02939}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalogManagement", "ProductCatalogManagement\ProductCatalogManagement.csproj", "{D3C2FF63-87B8-4E07-AC10-2986DC396EE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +123,10 @@ Global
 		{5659F99F-870B-40BF-A877-329391C85434}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5659F99F-870B-40BF-A877-329391C85434}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5659F99F-870B-40BF-A877-329391C85434}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3C2FF63-87B8-4E07-AC10-2986DC396EE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C2FF63-87B8-4E07-AC10-2986DC396EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C2FF63-87B8-4E07-AC10-2986DC396EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C2FF63-87B8-4E07-AC10-2986DC396EE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +153,7 @@ Global
 		{4C27088C-C3F8-45C1-92E0-8EA7EF30A025} = {18AE8C9C-4027-43D6-8775-DFC57CD98544}
 		{05D72E51-F8DF-454E-9F7E-E632B5A0A555} = {4C27088C-C3F8-45C1-92E0-8EA7EF30A025}
 		{5659F99F-870B-40BF-A877-329391C85434} = {4C27088C-C3F8-45C1-92E0-8EA7EF30A025}
+		{D3C2FF63-87B8-4E07-AC10-2986DC396EE5} = {F50361C0-7AC8-4FE5-BCA6-8AD070F02939}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B404AF0-15D2-487F-98BD-1E44C6038861}
