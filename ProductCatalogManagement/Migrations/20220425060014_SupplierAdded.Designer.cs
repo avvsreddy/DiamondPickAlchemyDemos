@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductCatalogManagement.DataAccess;
 
 namespace ProductCatalogManagement.Migrations
 {
     [DbContext(typeof(ProductsCatalogDbContext))]
-    partial class ProductsCatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220425060014_SupplierAdded")]
+    partial class SupplierAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,33 +38,6 @@ namespace ProductCatalogManagement.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("ProductCatalogManagement.Entities.Person", b =>
-                {
-                    b.Property<int>("PersonID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PersonID");
-
-                    b.ToTable("People");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Person");
                 });
 
             modelBuilder.Entity("ProductCatalogManagement.Entities.Product", b =>
@@ -95,39 +70,43 @@ namespace ProductCatalogManagement.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("ProductCatalogManagement.Entities.Supplier", b =>
+                {
+                    b.Property<int>("SupplierID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("SupplierID");
+
+                    b.ToTable("Suppliers");
+                });
+
             modelBuilder.Entity("ProductSupplier", b =>
                 {
                     b.Property<int>("ProductsProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SuppliersPersonID")
+                    b.Property<int>("SuppliersSupplierID")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductsProductId", "SuppliersPersonID");
+                    b.HasKey("ProductsProductId", "SuppliersSupplierID");
 
-                    b.HasIndex("SuppliersPersonID");
+                    b.HasIndex("SuppliersSupplierID");
 
                     b.ToTable("ProductSupplier");
-                });
-
-            modelBuilder.Entity("ProductCatalogManagement.Entities.Customer", b =>
-                {
-                    b.HasBaseType("ProductCatalogManagement.Entities.Person");
-
-                    b.Property<double>("Discount")
-                        .HasColumnType("float");
-
-                    b.HasDiscriminator().HasValue("Customer");
-                });
-
-            modelBuilder.Entity("ProductCatalogManagement.Entities.Supplier", b =>
-                {
-                    b.HasBaseType("ProductCatalogManagement.Entities.Person");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Supplier");
                 });
 
             modelBuilder.Entity("ProductCatalogManagement.Entities.Product", b =>
@@ -149,7 +128,7 @@ namespace ProductCatalogManagement.Migrations
 
                     b.HasOne("ProductCatalogManagement.Entities.Supplier", null)
                         .WithMany()
-                        .HasForeignKey("SuppliersPersonID")
+                        .HasForeignKey("SuppliersSupplierID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

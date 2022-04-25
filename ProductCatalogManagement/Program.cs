@@ -11,7 +11,46 @@ namespace ProductCatalogManagement
         static void Main(string[] args)
         {
             ProductsCatalogDbContext db = new ProductsCatalogDbContext();
-            // Get all products belogns to Smart Watch category
+            // get all customers
+
+            var customers = db.Customers.ToList();
+            foreach (var item in customers)
+            {
+                Console.WriteLine(item.Name);
+            }
+
+        }
+
+        private static void NewMethod2(ProductsCatalogDbContext db)
+        {
+            // Add new customer and new supplier
+            var cust = new Customer { Name = "Customer 1", Discount = 6.5 };
+            var supp = new Supplier { Name = "Supplier 1", Rating = 4 };
+
+            db.People.Add(cust);
+            db.People.Add(supp);
+            db.SaveChanges();
+        }
+
+        private static void NewMethod1(ProductsCatalogDbContext db)
+        {
+            // Add two new products with one new supplier with one new category
+            var s = new Supplier { Name = "Supplier 1" };
+            var c = new Category { Name = "Laptops" };
+            var p1 = new Product { Name = "Dell XPS 123" };
+            var p2 = new Product { Name = "HP Pavilion 123" };
+            p1.Category = c;
+            p2.Category = c;
+            p1.Suppliers.Add(s);
+            p2.Suppliers.Add(s);
+            db.Products.Add(p1);
+            db.Products.Add(p2);
+            db.SaveChanges();
+        }
+
+        private static void NewMethod(ProductsCatalogDbContext db)
+        {
+            // Get all products belongs to Smart Watch category
             // case 1
 
             var products = from c in db.Categories

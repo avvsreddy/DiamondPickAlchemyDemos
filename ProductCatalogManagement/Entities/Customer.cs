@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProductCatalogManagement.Entities
 {
-    public class Supplier : Person
+    public class Customer : Person
     {
-       
-        public int Rating { get; set; }
-
-        public List<Product> Products { get; set; } = new List<Product>();
+        public double Discount { get; set; }
     }
 }

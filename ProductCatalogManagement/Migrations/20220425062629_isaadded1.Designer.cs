@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductCatalogManagement.DataAccess;
 
 namespace ProductCatalogManagement.Migrations
 {
     [DbContext(typeof(ProductsCatalogDbContext))]
-    partial class ProductsCatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220425062629_isaadded1")]
+    partial class isaadded1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,16 +110,6 @@ namespace ProductCatalogManagement.Migrations
                     b.HasIndex("SuppliersPersonID");
 
                     b.ToTable("ProductSupplier");
-                });
-
-            modelBuilder.Entity("ProductCatalogManagement.Entities.Customer", b =>
-                {
-                    b.HasBaseType("ProductCatalogManagement.Entities.Person");
-
-                    b.Property<double>("Discount")
-                        .HasColumnType("float");
-
-                    b.HasDiscriminator().HasValue("Customer");
                 });
 
             modelBuilder.Entity("ProductCatalogManagement.Entities.Supplier", b =>

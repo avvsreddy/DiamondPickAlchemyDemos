@@ -19,6 +19,6 @@ namespace ProductCatalogManagement.Entities
 
         public Category Category { get; set; }
 
-        public List<Supplier> Suppliers { get; set; }
+        public List<Supplier> Suppliers { get; set; } = new List<Supplier>();
     }
 }
