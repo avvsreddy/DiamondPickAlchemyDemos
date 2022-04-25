@@ -25,10 +25,15 @@ namespace ProductCatalogManagement.DataAccess
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=MyProductsCatalogDb;Integrated Security=True");
+                
+                optionsBuilder.LogTo ( Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
             }
             //base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; }
     }
 }

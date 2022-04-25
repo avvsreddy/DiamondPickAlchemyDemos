@@ -15,6 +15,10 @@ namespace ProductCatalogManagement.Entities
         public string Name { get; set; }
         public int Cost { get; set; }
         public bool IsInStock { get; set; }
+        public string Brand { get; set; }
 
+        public Category Category { get; set; }
+
+        public List<Supplier> Suppliers { get; set; }
     }
 }

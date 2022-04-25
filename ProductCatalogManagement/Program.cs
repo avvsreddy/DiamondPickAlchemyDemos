@@ -1,4 +1,5 @@
-﻿using ProductCatalogManagement.DataAccess;
+﻿using Microsoft.EntityFrameworkCore;
+using ProductCatalogManagement.DataAccess;
 using ProductCatalogManagement.Entities;
 using System;
 using System.Linq;
@@ -9,23 +10,64 @@ namespace ProductCatalogManagement
     {
         static void Main(string[] args)
         {
-            // Manage Products - CRUD
-            // Development Approach
-            // 1. Code First
-            // 2. DB First
+            ProductsCatalogDbContext db = new ProductsCatalogDbContext();
+            // Get all products belogns to Smart Watch category
+            // case 1
+
+            var products = from c in db.Categories
+                           where c.Name == "Smart Watch"
+                           select c.Products;
 
 
-            // What information?
-            // Create Entity Classess
+            foreach (var c in products)
+            {
+                foreach (var item in c)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
 
-            // Add new product - Write only OO Code
+            // case 2
 
-            //SaveProduct();
-            //ShowAllProducts();
-            //DeleteProduct();
-            EditProduct();
+            Console.WriteLine("Case 2 ================");
+
+            var plist = from p in db.Products
+                        where p.Category.Name == "Smart Watch"
+                        select p;
+
+            foreach (var item in plist)
+            {
+                Console.WriteLine(item.Name);
+            }
         }
 
+        private static void GetProductsIncludeCategory()
+        {
+            ProductsCatalogDbContext db = new ProductsCatalogDbContext();
+            // Read Product name and category name display
+
+            var productCategory = db.Products.Include(p => p.Category).ToList();
+
+            foreach (var item in productCategory)
+            {
+                Console.WriteLine($"{item.Name}\t {item.Category.Name}");
+            }
+        }
+
+        private static void AddProductWithCategory()
+        {
+            ProductsCatalogDbContext db = new ProductsCatalogDbContext();
+            // Case 1: Add a new category with new product
+
+            var c = new Category { Name = "Smart Watch", Description = "Smart watch" };
+
+            var p = new Product { Name = "IWatch X", Cost = 56000, Brand = "Apple", IsInStock = true, Category = c };
+
+            db.Products.Add(p);
+            //db.Categories.Add(c);
+            db.SaveChanges();
+            Console.WriteLine("Product and Category added.");
+        }
 
         private static void EditProduct()
         {
@@ -36,6 +78,7 @@ namespace ProductCatalogManagement
             db.SaveChanges();
             Console.WriteLine("Product modified");
         }
+
         private static void DeleteProduct()
         {
             ProductsCatalogDbContext db = new ProductsCatalogDbContext();

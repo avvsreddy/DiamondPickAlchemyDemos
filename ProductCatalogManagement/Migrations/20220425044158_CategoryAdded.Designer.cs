@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductCatalogManagement.DataAccess;
 
 namespace ProductCatalogManagement.Migrations
 {
     [DbContext(typeof(ProductsCatalogDbContext))]
-    partial class ProductsCatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220425044158_CategoryAdded")]
+    partial class CategoryAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,15 +73,10 @@ namespace ProductCatalogManagement.Migrations
             modelBuilder.Entity("ProductCatalogManagement.Entities.Product", b =>
                 {
                     b.HasOne("ProductCatalogManagement.Entities.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ProductCatalogManagement.Entities.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
